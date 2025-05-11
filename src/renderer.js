@@ -35,7 +35,6 @@ setInterval(async () => {
       info.title,
       info.artist
     );
-    console.log(jacket_image);
     albumElement.style.backgroundImage = `url(${jacket_image})`;
   }
 }, 1000);

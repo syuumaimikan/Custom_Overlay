@@ -46,7 +46,7 @@ async function getCoverArt(songTitle, artistName) {
 }
 
 // 使用例
-getCoverArt("もうどうなってもいいや", "星街すいせい").then((imageUrl) => {
+getCoverArt("ビビデバ", "星街すいせい").then((imageUrl) => {
   if (imageUrl) {
     console.log("Jacket Image URL:", imageUrl);
   } else {
