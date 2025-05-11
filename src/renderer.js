@@ -7,6 +7,8 @@ const backbtn = document.getElementById("back");
 const skipbtn = document.getElementById("skip");
 const pausebtn = document.getElementById("pause");
 
+let pause_start_trrig = true;
+
 const appFaviconMap = {
   spotify: "open.spotify.com",
   chrome: "www.google.com",
@@ -52,4 +54,11 @@ skipbtn.addEventListener("click", async () => {
 pausebtn.addEventListener("click", async () => {
   const result = await window.api.mediaControl("playpause");
   console.log(result);
+  if (pause_start_trrig) {
+    pause_start_trrig = false;
+    pausebtn.textContent = "⏸";
+  } else {
+    pause_start_trrig = true;
+    pausebtn.textContent = "⏯";
+  }
 });

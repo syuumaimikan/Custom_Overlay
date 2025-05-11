@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const scripts = require("./scripts");
 
-const CACHE_FILE_PATH = path.join(__dirname, "mediaCache.json");
+const CACHE_FILE_PATH = path.join(app.getPath("userData"), "mediaCache.json");
 
 const addonPath = path.resolve(
   __dirname,
@@ -18,19 +18,45 @@ if (!fs.existsSync(addonPath)) {
 const myaddon = require(addonPath);
 const key_addon = require("../tools/media_keys/build/Release/media_keys.node");
 
+function initCacheFile() {
+  try {
+    const dir = path.dirname(CACHE_FILE_PATH);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+    if (!fs.existsSync(CACHE_FILE_PATH)) {
+      // 初期値をセットするか、空のデータで作成
+      const initialData = { datas: [] };
+      fs.writeFileSync(
+        CACHE_FILE_PATH,
+        JSON.stringify(initialData, null, 2),
+        "utf8"
+      );
+      console.log("mediaCache.json を初期化しました:", CACHE_FILE_PATH);
+    }
+  } catch (err) {
+    console.error("キャッシュファイル初期化エラー:", err);
+  }
+}
+
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 640,
+    height: 160,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      frame: false,
+      transparent: true,
+      resizable: false,
     },
   });
-
+  win.setAlwaysOnTop(true, "screen-saver"); // 最前面表示
   win.loadFile("src/renderer.html");
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  initCacheFile();
+  createWindow();
+});
 
 // キャッシュの取得
 function getCache(artist_name, music_name) {
