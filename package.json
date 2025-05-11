@@ -1,0 +1,26 @@
+{
+  "name": "custom_overlay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syuumaimikan/Custom_Overlay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/syuumaimikan/Custom_Overlay/issues"
+  },
+  "homepage": "https://github.com/syuumaimikan/Custom_Overlay#readme",
+  "dependencies": {
+    "electron": "^36.2.0",
+    "node-addon-api": "^8.3.1",
+    "node-gyp": "^11.2.0"
+  }
+}

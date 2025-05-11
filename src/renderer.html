@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>メディア情報</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button id="myButton">取得</button>
+    <div id="media-container">
+      <div id="volume">
+        <div id="volume-level"></div>
+      </div>
+      <div id="controls">
+        <div id="media-info">
+          <div id="title">Waiting for media info...</div>
+          <div id="artist"></div>
+        </div>
+        <div id="controls-buttons">
+          <div class="control-button" id="back">⏮</div>
+          <div class="control-button" id="pause">⏯</div>
+          <div class="control-button" id="skip">⏭</div>
+        </div>
+      </div>
+      <table width="200" height="150">
+        <tr align="center">
+          <td colspan="2"><div id="album-art"></div></td>
+        </tr>
+        <tr align="center">
+          <td><div id="icon"></div></td>
+          <td><div id="appName"></div></td>
+        </tr>
+      </table>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>
