@@ -28,6 +28,11 @@ document.getElementById("myButton").addEventListener("click", async () => {
     }
     titleElement.innerText = info.title;
     artistElement.innerText = info.artist;
-    albumElement.innerText = info.album;
+    const jacket_image = await window.api.getJacketImage(
+      info.title,
+      info.artist
+    );
+    console.log(jacket_image);
+    albumElement.style.backgroundImage = `url(${jacket_image})`;
   }
 });

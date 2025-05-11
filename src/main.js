@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const fs = require("fs");
+const scripts = require("./scripts");
 
 const addonPath = path.resolve(
   __dirname,
@@ -31,6 +32,15 @@ app.whenReady().then(createWindow);
 ipcMain.handle("get-media-info", () => {
   try {
     const result = myaddon.getMediaInfo();
+    return result;
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+
+ipcMain.handle("get-media-img", async (event, music_name, artist_name) => {
+  try {
+    const result = await scripts.getJacketImage(music_name, artist_name);
     return result;
   } catch (err) {
     return { error: err.message };
