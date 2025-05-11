@@ -42,11 +42,14 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 640,
     height: 160,
+    frame: false, // 枠なし
+    transparent: true, // 透明背景
+    resizable: false,
+    hasShadow: false, // シャドウも不要なら追加
+    alwaysOnTop: true, // 常に最前面（任意）
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      frame: false,
-      transparent: true,
-      resizable: false,
+      backgroundThrottling: false,
     },
   });
   win.setAlwaysOnTop(true, "screen-saver"); // 最前面表示
