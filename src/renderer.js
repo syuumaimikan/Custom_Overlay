@@ -3,13 +3,16 @@ const artistElement = document.getElementById("artist");
 const albumElement = document.getElementById("album-art");
 const iconElement = document.getElementById("icon");
 const appElement = document.getElementById("appName");
+const backbtn = document.getElementById("back");
+const skipbtn = document.getElementById("skip");
+const pausebtn = document.getElementById("pause");
+
 const appFaviconMap = {
   spotify: "open.spotify.com",
   chrome: "www.google.com",
-  // 他のアプリも追加可能
 };
 
-document.getElementById("myButton").addEventListener("click", async () => {
+setInterval(async () => {
   const info = await window.api.getMediaInfo();
 
   if (info.error) {
@@ -35,4 +38,19 @@ document.getElementById("myButton").addEventListener("click", async () => {
     console.log(jacket_image);
     albumElement.style.backgroundImage = `url(${jacket_image})`;
   }
+}, 1000);
+
+backbtn.addEventListener("click", async () => {
+  const result = await window.api.mediaControl("prev");
+  console.log(result);
+});
+
+skipbtn.addEventListener("click", async () => {
+  const result = await window.api.mediaControl("next");
+  console.log(result);
+});
+
+pausebtn.addEventListener("click", async () => {
+  const result = await window.api.mediaControl("playpause");
+  console.log(result);
 });

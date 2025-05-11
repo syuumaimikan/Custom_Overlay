@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const addonPath = path.resolve(
   __dirname,
-  "./tools/build/Release/media_info.node"
+  "./tools/media_info/build/Release/media_info.node"
 );
 
 if (!fs.existsSync(addonPath)) {
@@ -15,7 +15,7 @@ const myaddon = require(addonPath);
 console.log(myaddon.getMediaInfo());
 
 const axios = require("axios");
-
+const mediaKeys = require("./tools/media_keys/build/Release/media_keys.node");
 async function getCoverArt(songTitle, artistName) {
   try {
     // ① MusicBrainzからMBIDを取得
@@ -53,3 +53,5 @@ getCoverArt("もうどうなってもいいや", "星街すいせい").then((ima
     console.log("Image not found.");
   }
 });
+
+mediaKeys.playpause();

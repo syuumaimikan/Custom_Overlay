@@ -5,7 +5,7 @@ const scripts = require("./scripts");
 
 const addonPath = path.resolve(
   __dirname,
-  "../tools/build/Release/media_info.node"
+  "../tools/media_info/build/Release/media_info.node"
 );
 
 if (!fs.existsSync(addonPath)) {
@@ -14,6 +14,7 @@ if (!fs.existsSync(addonPath)) {
 }
 
 const myaddon = require(addonPath);
+const key_addon = require("../tools/media_keys/build/Release/media_keys.node");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -44,5 +45,20 @@ ipcMain.handle("get-media-img", async (event, music_name, artist_name) => {
     return result;
   } catch (err) {
     return { error: err.message };
+  }
+});
+
+ipcMain.handle("media-control", (event, action) => {
+  try {
+    if (action === "next") {
+      key_addon.next();
+    } else if (action === "prev") {
+      key_addon.prev();
+    } else if (action === "playpause") {
+      key_addon.playpause();
+    }
+    return { status: "success" };
+  } catch (error) {
+    return { error: error.message };
   }
 });
